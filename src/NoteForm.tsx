@@ -4,18 +4,23 @@ import { Link } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
 import { NoteData, Tag } from "./App";
 
+
+// Type representing the props expected by the NoteForm component.
 type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
 };
 
 export function NoteForm({ onSubmit }: NoteFormProps) {
+  // Refs to capture the input values
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
+  // State to store the selected tags
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-
+    
+    // Construct the note data object and invoke the onSubmit callback
     onSubmit({
       title: titleRef.current!.value,
       markdown: markdownRef.current!.value,
