@@ -7,7 +7,7 @@ import styles from "./NoteLists.module.css";
 
 type NoteListProps = {
   availableTags: Tag[];
-  notes: Note[];
+  notes: SimplifiedNote[];
 };
 
 type SimplifiedNote = {
