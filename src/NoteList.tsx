@@ -9,6 +9,12 @@ type NoteListProps = {
   notes: Note[];
 };
 
+type SimplifiedNote = {
+  tags: Tag[];
+  title: string;
+  id: string;
+};
+
 export function NoteList({ availableTags, notes }: NoteListProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [title, setTitle] = useState("");
@@ -82,13 +88,16 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
 
       {/* CARDS */}
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {/* loop through all of our notes */}
-        {filteredNotes.map((note) => {
+        {filteredNotes.map((note) => (
           <Col key={note.id}>
-            <NoteCard />
-          </Col>;
-        })}
+            <NoteCard id={note.id} title={note.title} tags={note.tags} />
+          </Col>
+        ))}
       </Row>
     </>
   );
+}
+
+function NoteCard({ id, title, tags }: SimplifiedNote) {
+  return <h1>Hi</h1>
 }
