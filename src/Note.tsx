@@ -27,9 +27,8 @@ export function Note() {
             </Link>
             <Button variant="outline-danger">Delete</Button>
             <Link to="..">
-            <Button variant="outline-secondary">Back</Button>
+              <Button variant="outline-secondary">Back</Button>
             </Link>
-
           </Stack>
         </Col>
       </Row>
