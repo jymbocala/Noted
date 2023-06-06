@@ -8,6 +8,7 @@ import { v4 as uuidV4 } from "uuid";
 import { NoteList } from "./NoteList";
 import { NoteLayout } from "./NoteLayout";
 import { Note } from "./Note";
+import { EditNote } from "./EditNote";
 
 // Type representing a Note
 export type Note = {
@@ -68,7 +69,10 @@ function App() {
   return (
     <Container className="my-4">
       <Routes>
-        <Route path="/" element={<NoteList notes={noteWithTags} availableTags={tags}/>} />
+        <Route
+          path="/"
+          element={<NoteList notes={noteWithTags} availableTags={tags} />}
+        />
         <Route
           path="/new"
           element={
@@ -80,8 +84,17 @@ function App() {
           }
         />
         <Route path="/:id" element={<NoteLayout notes={noteWithTags} />}>
-          <Route index element={<Note/>} />
-          <Route path="edit" element={<h1>Edit</h1>} />
+          <Route index element={<Note />} />
+          <Route
+            path="edit"
+            element={
+              <EditNote
+                onSubmit={onUpdateNote}
+                onAddTag={addTag}
+                availableTags={tags}
+              />
+            }
+          />
         </Route>
         {/* Catch-all route to redirect to the home page */}
         <Route path="*" element={<Navigate to="/" />} />
