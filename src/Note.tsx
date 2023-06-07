@@ -16,6 +16,7 @@ export function Note({ onDelete }: NoteProps) {
       <Row className="align-items-center mb-4">
         <Col>
           <h1>{note.title}</h1>
+          {/* Display the tags associated with the note */}
           {note.tags.length > 0 && (
             <Stack gap={1} direction="horizontal" className="flex-wrap">
               {note.tags.map((tag) => (
@@ -31,10 +32,15 @@ export function Note({ onDelete }: NoteProps) {
             <Link to={`/${note.id}/edit`}>
               <Button variant="primary">Edit</Button>
             </Link>
-            <Button onClick={() => {
-              onDelete(note.id)
-              navigate("/")
-            }} variant="outline-danger">Delete</Button>
+            <Button
+              onClick={() => {
+                onDelete(note.id);
+                navigate("/");
+              }}
+              variant="outline-danger"
+            >
+              Delete
+            </Button>
             <Link to="..">
               <Button variant="outline-secondary">Back</Button>
             </Link>

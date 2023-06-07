@@ -48,7 +48,7 @@ export function NoteForm({
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control ref={titleRef} required defaultValue={title}/>
+              <Form.Control ref={titleRef} required defaultValue={title} />
             </Form.Group>
           </Col>
           <Col>
@@ -56,31 +56,42 @@ export function NoteForm({
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
                 onCreateOption={(label) => {
+                  // Generate a new tag object with a unique ID and the provided label
                   const newTag = { id: uuidV4(), label };
                   onAddTag(newTag);
                   setSelectedTags((prev) => [...prev, newTag]);
                 }}
+                // Convert availableTags into the format required by CreatableReactSelect
                 options={availableTags.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}
+                // Convert selectedTags into the format required by CreatableReactSelect
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}
+                // Handle the change event when selecting or deselecting tags
                 onChange={(tags) => {
+                  // Update the selectedTags state with the new selected tags
                   setSelectedTags(
                     tags.map((tag) => {
                       return { label: tag.label, id: tag.value };
                     })
                   );
                 }}
-                isMulti
+                isMulti // Allow multiple tags to be selected
               />
             </Form.Group>
           </Col>
         </Row>
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <Form.Control defaultValue={markdown} required as="textarea" ref={markdownRef} rows={15} />
+          <Form.Control
+            defaultValue={markdown}
+            required
+            as="textarea"
+            ref={markdownRef}
+            rows={15}
+          />
         </Form.Group>
         <Stack direction={"horizontal"} gap={2} className="justify-content-end">
           <Button type="submit" variant="primary">

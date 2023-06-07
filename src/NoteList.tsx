@@ -46,12 +46,18 @@ export function NoteList({
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
   const filteredNotes = useMemo(() => {
+    // Use the useMemo hook to memoize the filteredNotes value and avoid unnecessary re-renders
+
     return notes.filter((note) => {
+      // Filter the notes array based on the following conditions:
+
       return (
-        title === "" ||
-        (note.title.toLowerCase().includes(title.toLowerCase()) &&
+        title === "" || // If the title is empty, include all notes
+        (note.title.toLowerCase().includes(title.toLowerCase()) && // Check if the note title contains the search title (case-insensitive)
+          // Check if the selectedTags are empty or every selected tag is present in the note's tags
           (selectedTags.length === 0 ||
             selectedTags.every((tag) => {
+              // Iterate over each selected tag and check if it exists in the note's tags
               note.tags.some((noteTag) => noteTag.id === tag.id);
             })))
       );
@@ -82,7 +88,8 @@ export function NoteList({
 
       <blockquote className="blockquote text-center text-muted ">
         <p className="small">
-          "Taking notes is the habit of a curious mind, valuing the importance of capturing and preserving valuable information."
+          "Taking notes is the habit of a curious mind, valuing the importance
+          of capturing and preserving valuable information."
         </p>
       </blockquote>
 
@@ -103,20 +110,25 @@ export function NoteList({
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
+                // The options property populate the select menu
                 options={availableTags.map((tag) => {
+                  // Convert availableTags into an array of objects with label and value properties
                   return { label: tag.label, value: tag.id };
                 })}
                 value={selectedTags.map((tag) => {
+                  // Convert selectedTags into an array of objects with label and value properties
                   return { label: tag.label, value: tag.id };
                 })}
                 onChange={(tags) => {
+                  // Handle the onChange event when selecting or deselecting tags
                   setSelectedTags(
                     tags.map((tag) => {
+                      // Convert the selected tags into an array of objects with label and id properties
                       return { label: tag.label, id: tag.value };
                     })
                   );
                 }}
-                isMulti
+                isMulti // Allow multiple tags to be selected
               />
             </Form.Group>
           </Col>
@@ -126,6 +138,7 @@ export function NoteList({
       {/* CARDS */}
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
         {filteredNotes.map((note) => (
+          // Render the filterdNotes data into each column
           <Col key={note.id}>
             <NoteCard id={note.id} title={note.title} tags={note.tags} />
           </Col>
