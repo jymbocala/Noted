@@ -63,7 +63,7 @@ export function NoteList({
       {/* HEADER */}
       <Row className="align-items-center mb-4">
         <Col>
-          <h1>Notes</h1>
+          <h1>✏️ Noted</h1>
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
@@ -80,9 +80,15 @@ export function NoteList({
         </Col>
       </Row>
 
+      <blockquote className="blockquote text-center text-muted ">
+        <p className="small">
+          "Taking notes is the habit of a curious mind, valuing the importance of capturing and preserving valuable information."
+        </p>
+      </blockquote>
+
       {/* FORM */}
       <Form>
-        <Row className="mb-4">
+        <Row className="my-4">
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
@@ -187,10 +193,19 @@ function EditTagsModal({
             {availableTags.map((tag) => (
               <Row key={tag.id}>
                 <Col>
-                  <Form.Control type="text" value={tag.label} onChange={e => onUpdateTag(tag.id, e.target.value)}/>
+                  <Form.Control
+                    type="text"
+                    value={tag.label}
+                    onChange={(e) => onUpdateTag(tag.id, e.target.value)}
+                  />
                 </Col>
                 <Col xs="auto">
-                  <Button variant="outline-danger" onClick={() => onDeleteTag(tag.id)}>&times;</Button>
+                  <Button
+                    variant="outline-danger"
+                    onClick={() => onDeleteTag(tag.id)}
+                  >
+                    &times;
+                  </Button>
                 </Col>
               </Row>
             ))}
